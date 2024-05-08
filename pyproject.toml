@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "healthy-habit-tracker"
+version = "0.1.0"
+description = ""
+authors = ["Andrew_Polik <polik.24@mail.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^5.0.6"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
