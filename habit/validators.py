@@ -57,4 +57,12 @@ class PleasantHabitNotHaveRelatedRewardValidator:
 
 
 class PeriodicityHabitValidator:
-    pass
+    """Класс валидации периодичности выполнения привычки. Не менее 1 раза в неделю и не более 7 раз в неделю."""
+    def __init__(self, periodicity):
+        self.periodicity = periodicity
+
+    def __call__(self, value):
+        if self.periodicity in value:
+            periodicity = value[self.periodicity]
+            if not 1 <= periodicity <= 7:
+                raise ValidationError('За одну неделю необходимо выполнить привычку хотя бы один раз.')
