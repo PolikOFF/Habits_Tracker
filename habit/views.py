@@ -1,4 +1,5 @@
 from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 from habit.models import Habit
 from habit.pagination import HabitCustomPagination
@@ -9,6 +10,7 @@ from habit.seralizers import HabitSerializer
 class HabitCreateAPIViewSet(generics.CreateAPIView):
     """Класс создания привычки."""
     serializer_class = HabitSerializer
+    permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
         """Метод для привязки привычки к пользователю."""
@@ -20,7 +22,7 @@ class HabitListAPIViewSet(generics.ListAPIView):
     serializer_class = HabitSerializer
     queryset = Habit.objects.all()
     pagination_class = HabitCustomPagination
-    permission_classes = []
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         """Переопределение метода, для отображения привычек, которые принадлежат автору."""
@@ -32,7 +34,7 @@ class PublicHabitListAPIViewSet(generics.ListAPIView):
     serializer_class = HabitSerializer
     queryset = Habit.objects.all()
     pagination_class = HabitCustomPagination
-    permission_classes = []
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         """Переопределение метода, для отображения только публичных привычек."""
@@ -43,18 +45,18 @@ class HabitRetrieveAPIViewSet(generics.RetrieveAPIView):
     """Класс просмотра одной привычки."""
     serializer_class = HabitSerializer
     queryset = Habit.objects.all()
-    permission_classes = [IsOwner]
+    permission_classes = [IsAuthenticated, IsOwner]
 
 
 class HabitUpdateAPIViewSet(generics.UpdateAPIView):
     """Класс редактирования привычки."""
     serializer_class = HabitSerializer
     queryset = Habit.objects.all()
-    permission_classes = [IsOwner]
+    permission_classes = [IsAuthenticated, IsOwner]
 
 
 class HabitDestroyAPIViewSet(generics.DestroyAPIView):
     """Класс удаления привычки."""
     serializer_class = HabitSerializer
     queryset = Habit.objects.all()
-    permission_classes = [IsOwner]
+    permission_classes = [IsAuthenticated, IsOwner, IsAdminUser]
