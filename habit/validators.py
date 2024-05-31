@@ -9,7 +9,10 @@ class RewardValidator:
         self.related_habit = related_habit
 
     def __call__(self, value):
-        if value.get(self.reward) and value.get(self.related_habit):
+        related_habit = dict(value).get(self.reward)
+        reward = dict(value).get(self.related_habit)
+
+        if related_habit and reward:
             raise ValidationError(
                 "Не должно быть заполнено одновременно и поле вознаграждения, и поле связанной привычки. Можно заполнить только одно из двух полей.")
 
@@ -21,22 +24,20 @@ class TimeToCompleteValidator:
 
     def __call__(self, value):
         if self.time_to_complete in value:
-            time_duration = value[self.time_to_complete]
+            time_duration = dict(value).get(self.time_to_complete)
             if time_duration > 120:
                 raise ValidationError("Время выполнения должно быть не больше 120 секунд.")
 
 
 class PleasantHabitInRelatedHabitValidator:
     """Класс валидации того, что в связанные привычки могут попадать только привычки с признаком приятной привычки."""
-    def __init__(self, related_habit, pleasant_habit):
+    def __init__(self, related_habit):
         self.related_habit = related_habit
-        self.pleasant_habit = pleasant_habit
 
     def __call__(self, value):
         if value:
-            related_habit = value[self.related_habit]
-            pleasant_habit = value[self.pleasant_habit]
-            if related_habit and not pleasant_habit:
+            related_habit = dict(value).get(self.related_habit)
+            if related_habit and not related_habit.pleasant_habit:
                 raise ValidationError('В связанные привычки могут попадать только привычки с признаком приятной привычки.')
 
 
@@ -49,9 +50,9 @@ class PleasantHabitNotHaveRelatedRewardValidator:
 
     def __call__(self, value):
         if value:
-            pleasant_habit = value[self.pleasant_habit]
-            related_habit = value[self.related_habit]
-            reward = value[self.reward]
+            pleasant_habit = dict(value).get(self.pleasant_habit)
+            related_habit = dict(value).get(self.related_habit)
+            reward = dict(value).get(self.reward)
             if pleasant_habit and (related_habit or reward):
                 raise ValidationError('У приятной привычки не может быть вознаграждения или связанной привычки.')
 
@@ -63,6 +64,6 @@ class PeriodicityHabitValidator:
 
     def __call__(self, value):
         if self.periodicity in value:
-            periodicity = value[self.periodicity]
+            periodicity = dict(value).get(self.periodicity)
             if not 1 <= periodicity <= 7:
                 raise ValidationError('За одну неделю необходимо выполнить привычку хотя бы один раз.')

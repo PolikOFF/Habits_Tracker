@@ -14,7 +14,9 @@ class HabitCreateAPIViewSet(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         """Метод для привязки привычки к пользователю."""
-        serializer.save(user=self.request.user)
+        new_habit = serializer.save()
+        new_habit.owner = self.request.user
+        new_habit.save()
 
 
 class HabitListAPIViewSet(generics.ListAPIView):
@@ -26,7 +28,7 @@ class HabitListAPIViewSet(generics.ListAPIView):
 
     def get_queryset(self):
         """Переопределение метода, для отображения привычек, которые принадлежат автору."""
-        return Habit.objects.filter(user=self.request.user)
+        return Habit.objects.filter(owner=self.request.user)
 
 
 class PublicHabitListAPIViewSet(generics.ListAPIView):

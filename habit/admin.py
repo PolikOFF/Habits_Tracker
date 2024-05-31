@@ -1,7 +1,9 @@
 from django.contrib import admin
 
+from habit.models import Habit
 
-@admin.register
+
+@admin.register(Habit)
 class HabitAdmin(admin.ModelAdmin):
     """Класс для регистрации модели привычки в административной панели."""
-    list_display = ('user', 'action')
+    list_display = ('owner', 'action', 'time',)
