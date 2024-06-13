@@ -16,26 +16,43 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='habit',
             name='action',
-            field=models.CharField(default='создать действие', max_length=255, verbose_name='действие'),
+            field=models.CharField(
+                default='создать действие',
+                max_length=255,
+                verbose_name='действие'),
         ),
         migrations.AddField(
             model_name='habit',
             name='owner',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='создатель привычки'),
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+                verbose_name='создатель привычки'),
         ),
         migrations.AddField(
             model_name='habit',
             name='place',
-            field=models.CharField(blank=True, max_length=255, null=True, verbose_name='место выполнения привычки'),
+            field=models.CharField(
+                blank=True,
+                max_length=255,
+                null=True,
+                verbose_name='место выполнения привычки'),
         ),
         migrations.AddField(
             model_name='habit',
             name='pleasant_habit',
-            field=models.BooleanField(default=False, verbose_name='признак приятной привычки'),
+            field=models.BooleanField(
+                default=False, verbose_name='признак приятной привычки'),
         ),
         migrations.AddField(
             model_name='habit',
             name='time',
-            field=models.TimeField(blank=True, default='14:00:00', null=True, verbose_name='время выполнения привычки'),
+            field=models.TimeField(
+                blank=True,
+                default='14:00:00',
+                null=True,
+                verbose_name='время выполнения привычки'),
         ),
     ]

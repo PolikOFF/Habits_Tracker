@@ -140,8 +140,8 @@ AUTH_USER_MODEL = 'users.User'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-            'rest_framework_simplejwt.authentication.JWTAuthentication',
-        ),
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
 }
 
 # Настройки срока действия токенов.
@@ -175,7 +175,8 @@ CACHES = {
 CELERY_BEAT_SCHEDULE = {
     'blocking_a_user': {
         'task': 'habit.tasks.habit_reminder',  # Путь к задаче
-        'schedule': timedelta(days=1),  # Расписание выполнения задачи (например, каждый день)
+        # Расписание выполнения задачи (например, каждый день)
+        'schedule': timedelta(days=1),
     },
 }
 

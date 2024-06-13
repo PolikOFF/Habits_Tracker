@@ -7,7 +7,10 @@ from habit.services import send_telegram_message
 
 @shared_task
 def habit_reminder():
-    """Задача на отправку сообщения в телеграм, о времени выполнять привычку."""
+    """
+    Задача на отправку сообщения в телеграм,
+    о времени выполнять привычку.
+    """
     time_now = datetime.datetime.now().time()
     habits = Habit.objects.all()
 

@@ -6,9 +6,18 @@ NULLABLE = {'blank': True, 'null': True}
 
 class User(AbstractUser):
     username = None
-    email = models.EmailField(unique=True, max_length=100, verbose_name='электронная почта')
-    telegram_id = models.CharField(max_length=100, verbose_name='id телеграм-чата', **NULLABLE)
-    name = models.CharField(max_length=200, verbose_name='имя пользователя', **NULLABLE)
+    email = models.EmailField(
+        unique=True,
+        max_length=100,
+        verbose_name='электронная почта')
+    telegram_id = models.CharField(
+        max_length=100,
+        verbose_name='id телеграм-чата',
+        **NULLABLE)
+    name = models.CharField(
+        max_length=200,
+        verbose_name='имя пользователя',
+        **NULLABLE)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

@@ -27,7 +27,11 @@ class HabitListAPIViewSet(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        """Переопределение метода, для отображения привычек, которые принадлежат автору."""
+        """
+        Переопределение метода,
+        для отображения привычек,
+        которые принадлежат автору.
+        """
         return Habit.objects.filter(owner=self.request.user)
 
 
@@ -39,7 +43,10 @@ class PublicHabitListAPIViewSet(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        """Переопределение метода, для отображения только публичных привычек."""
+        """
+        Переопределение метода,
+        для отображения только публичных привычек.
+        """
         return Habit.objects.filter(is_public=True)
 
 

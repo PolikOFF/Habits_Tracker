@@ -15,12 +15,22 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Habit',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('periodicity', models.IntegerField(verbose_name='периодичность выполнения(в днях)')),
-                ('reward', models.CharField(blank=True, max_length=150, null=True, verbose_name='вознаграждение')),
-                ('time_to_complete', models.IntegerField(verbose_name='время на выполнение(в секундах)')),
-                ('is_public', models.BooleanField(default=False, verbose_name='признак публикации')),
-                ('related_habit', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='habit.habit', verbose_name='связанная привычка')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
+                ('periodicity', models.IntegerField(
+                    verbose_name='периодичность выполнения(в днях)')),
+                ('reward', models.CharField(blank=True, max_length=150,
+                 null=True, verbose_name='вознаграждение')),
+                ('time_to_complete', models.IntegerField(
+                    verbose_name='время на выполнение(в секундах)')),
+                ('is_public', models.BooleanField(
+                    default=False, verbose_name='признак публикации')),
+                ('related_habit',
+                 models.ForeignKey(blank=True,
+                                   null=True,
+                                   on_delete=django.db.models.deletion.CASCADE,
+                                   to='habit.habit',
+                                   verbose_name='связанная привычка')),
             ],
             options={
                 'verbose_name': 'привычка',

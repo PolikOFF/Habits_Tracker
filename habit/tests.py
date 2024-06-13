@@ -47,7 +47,11 @@ class HabitTestCase(APITestCase):
     def test_update(self):
         """Тест на обновление привычки."""
         habit = Habit.objects.create(
-            place="test", action="test", periodicity=1, time_to_complete=100, owner=self.user
+            place="test",
+            action="test",
+            periodicity=1,
+            time_to_complete=100,
+            owner=self.user
         )
 
         data = {'place': 'test1'}
@@ -59,15 +63,27 @@ class HabitTestCase(APITestCase):
     def test_delete(self):
         """Тест на удаление привычки."""
         habit = Habit.objects.create(
-            place="test", action="test", periodicity=1, time_to_complete=100, owner=self.user
+            place="test",
+            action="test",
+            periodicity=1,
+            time_to_complete=100,
+            owner=self.user
         )
 
         response = self.client.delete(f'/habit/delete/{habit.id}/')
 
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+        self.assertFalse(Habit.objects.filter(pk=habit.pk).exists())
+
     def test_retrieve(self):
         """Тест просмотра одной привычки."""
         habit = Habit.objects.create(
-            place="test", action="test", periodicity=1, time_to_complete=100, owner=self.user
+            place="test",
+            action="test",
+            periodicity=1,
+            time_to_complete=100,
+            owner=self.user
         )
 
         response = self.client.get(f'/habit/get/{habit.id}/')
