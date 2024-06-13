@@ -76,3 +76,29 @@ class HabitTestCase(APITestCase):
             response.status_code,
             status.HTTP_200_OK
         )
+
+    def test_time_to_complete_habit(self):
+        """Тест валидации привычки более 120 секунд."""
+        data = {
+            'action': 'действие',
+            'place': 'место',
+            'periodicity': '1',
+            'time_to_complete': '121'
+        }
+
+        response = self.client.post('/habit/create/', data=data)
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_periodicity_habit(self):
+        """Тест на проверку валидации периодичности привычки от 1 до 7."""
+        data = {
+            'action': 'действие',
+            'place': 'место',
+            'periodicity': '9',
+            'time_to_complete': '100'
+        }
+
+        response = self.client.post('/habit/create/', data=data)
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
