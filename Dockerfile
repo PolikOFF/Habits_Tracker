@@ -30,4 +30,4 @@ RUN poetry install --no-dev
 
 COPY . .
 
-ENTRYPOINT ["sh", "./entrypoint.prod.sh"]
+#ENTRYPOINT ["sh", "./entrypoint.prod.sh"]
