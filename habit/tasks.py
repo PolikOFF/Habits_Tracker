@@ -15,7 +15,7 @@ def habit_reminder():
     habits = Habit.objects.all()
 
     for habit in habits:
-        if habit.time == time_now:
+        if habit.time <= time_now:
             message = f'Пора выполнить привычку!\n' \
                       f'Действие - {habit.action}\n' \
                       f'Место - {habit.place}\n'

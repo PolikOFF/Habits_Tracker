@@ -176,7 +176,7 @@ CELERY_BEAT_SCHEDULE = {
     'blocking_a_user': {
         'task': 'habit.tasks.habit_reminder',  # Путь к задаче
         # Расписание выполнения задачи (например, каждый день)
-        'schedule': timedelta(days=1),
+        'schedule': timedelta(minutes=1),
     },
 }
 
